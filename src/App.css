@@ -1,33 +1,397 @@
-.App {
-  text-align: center;
+/* CSS Variables */
+:root {
+    --blue-violet: #6200ee;
+    --border-color: #d6d6d6;
+    --app-background-color: #fafafa;
+    --app-color-text: rgba(0, 0, 0, 0.87);
+    --search-mobile-width: 304px;
+    --search-desktop-width: 420px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+/* App-bar Header Styles */
+.app-search {
+    width: var(--search-mobile-width);
+    margin: 8px auto;
+    background: white;
+    border-radius: 3px;
+    height: 48px;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.14);
+    z-index: 30;
+}
+.app-search-results-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.32);
+    height: 100vh;
+    z-index: 15;
+}
+.app-search-results {
+    position: absolute;
+    top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: var(--search-mobile-width);
+    background: white;
+    max-height: 700px;
+    overflow: auto;
+    color: black;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
+    background-color: var(--app-background-color);
+    z-index: 25;
+}
+.app-search-results-list-img {
+    height: 40px;
+    width: 40px;
+    padding: 16px;
+}
+.MuiAppBar-colorPrimary.MuiAppBar-root {
+    background-color: var(--blue-violet);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app-search-icon {
+    padding: 12px 15px;
+    color: rgba(0, 0, 0, 0.54);
+}
+.MuiInputBase-root.app-search-text-box {
+    position: absolute;
+    margin: 12px 16px;
+    width: 236px;
+    height: 24px;
+    color: var(--app-color-text);
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: 0.15px;
+}
+.app-search-results-headers {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    color: rgba(0, 0, 0, 0.6);
+    text-transform: uppercase;
+    padding: 16px 12px;
+}
+.app-search-results-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.app-search-results-list li {
+    cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.app-search-results-list-name {
+    padding: 24px 22px;
+    display: inline-block;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border-color);
+    width: 61%;
+}
+.app-search-results-list-name:first-letter {
+    text-transform: capitalize;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Dialog Styles */
+.MuiDialogContent-dividers {
+    width: calc(100% - 50px);
+}
+.MuiList-root.MuiMenu-list option {
+    padding: 10px;
+    cursor: pointer;
+}
+.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm {
+    width: 100%;
+    margin: 8px;
+    max-height: unset;
+}
+.MuiFormControl-root.MuiTextField-root {
+    width: 100%;
+    background-color: #e7e7e7;
+}
+.MuiIconButton-root.close-button {
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    right: 12px;
+    color: var(--blue-violet);
+}
+.dialog-food-img {
+    width: 64px;
+    height: 64px;
+}
+.add-to-today {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    color: rgba(0, 0, 0, 0.6);
+    padding-top: 16px;
+    margin-top: 17px;
+    border-top: 1px solid #dadada;
+}
+.MuiSelect-selectMenu {
+    height: 35px !important;
+}
+.dialog-food-name {
+    font-size: 24px;
+    text-transform: capitalize;
+}
+.MuiFormControl-root.MuiTextField-root.dialog-servings-input {
+    width: 104px;
+}
+.MuiFormControl-root.MuiTextField-root {
+    margin-top: 5px;
+}
+.MuiInputLabel-root.MuiInputLabel-formControl {
+    padding-left: 16px;
+}
+.dialog-servings-info {
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+    width: 64px;
+    /* padding: 0 8px; */
+}
+.dialog-servings-info span {
+    display: block;
+}
+.dialog-servings-info-all {
+    display: inline-block;
+    text-align: right;
+    width: calc(100% - 104px);
+}
+.dialog-servings-info-number {
+    font-size: 24px;
+}
+.dialog-servings-info-desc {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+}
+.dialog-serving-unit {
+    font-size: 12px;
+    color: var(--blue-violet);
+    padding-left: 16px;
+}
+.dialog-add-btn-container {
+    text-align: right;
+}
+.dialog-add-btn.MuiButton-root {
+    background-color: var(--blue-violet);
+    width: 72px;
+}
+.MuiInputBase-input.MuiInput-input {
+    padding-left: 16px;
+}
+
+/* "Today" block styles */
+.app-dayview {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 16px 0;
+    position: relative;
+    z-index: 10;
+}
+.app-dayview-dir-icons .MuiSvgIcon-root {
+    color: var(--blue-violet);
+}
+
+/* Food Item + List styles  */
+.daily-food-items {
+    text-transform: capitalize;
+}
+.daily-food-item {
+    height: 72px;
+    padding: 16px 0 0 16px;
+}
+.daily-food-item img {
+    width: 40px;
+    height: 40px;
+}
+.daily-food-item-border {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+}
+.daily-food-item-bold {
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: 0.15px;
+    color: var(--app-color-text);
+}
+.daily-food-item-faint {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.6);
+}
+.lowercase {
+    text-transform: lowercase;
+}
+
+/* User Info + Calories Styles */
+.person-calories-consumed,
+.person-calories-goal {
+    text-align: left;
+    font-size: 24px;
+    color: var(--app-color-text);
+}
+.person-calories-goal {
+    text-align: right;
+}
+.person-calories-details {
+    display: block;
+    font-size: 12px;
+    line-height: 1.33;
+    letter-spacing: 0.4px;
+    color: rgba(0, 0, 0, 0.6);
+}
+.person-calories {
+    text-align: center;
+    padding: 16px 16px 0;
+}
+.person-calories-cal {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+    text-align: center;
+    color: var(--app-color-text);
+}
+.person-calories-percentage {
+    padding: 16px 0;
+}
+.daily-food-item-meal-info {
+    text-align: right;
+    padding-right: 16px;
+}
+.user-info-metrics {
+    padding: 40px;
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 8px;
+}
+.user-info-metrics .person-info-metrics {
+    margin: 0 auto;
+}
+.desktop-user-full-name {
+    text-align: center;
+    font-size: 24px;
+    color: var(--app-color-text);
+}
+.desktop-person-avatar.MuiAvatar-root {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
+}
+.user-info-metrics.MuiGrid-container {
+    display: none;
+}
+
+/* Mobile specific styles for the user info */
+.person-info-metrics {
+    background: rgba(0, 0, 0, 0.5);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 8px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.mobile-person-details .person-avatar.MuiAvatar-root {
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+}
+.mobile-person-details {
+    padding: 16px 8px;
+}
+.person-first-name {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 12px;
+}
+.person-info-metrics span {
+    display: block;
+}
+.person-info-metrics-number {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+}
+.person-calories-percentage-detail {
+    font-size: 14px;
+    line-height: 1.71;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+}
+.person-calories-meal {
+    font-size: 12px;
+    line-height: 1.33;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Floating Button Styles */
+.MuiFab-root.MuiFab-primary {
+    background-color: var(--blue-violet);
+}
+.MuiFab-root.floating-button {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 16px;
+}
+
+@media screen and (min-width: 960px) {
+    /* Desktop Specific Styles for Today Header */
+    .app-search {
+        width: var(--search-desktop-width);
+    }
+    .app-search-results {
+        width: var(--search-desktop-width);
+    }
+    .app-dayview {
+        color: white;
+        font-size: 34px;
+        background-color: var(--blue-violet);
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.14);
+        padding: 8px 0;
+    }
+    .app-dayview-dir-icons .MuiSvgIcon-root {
+        color: white;
+    }
+
+    /* Desktop Specific styles for user info */
+    .user-info {
+        background-color: #f5f5f5;
+        height: calc(100vh - 100px);
+    }
+    .mobile-person-details.MuiGrid-container {
+        display: none;
+    }
+    .user-info-metrics.MuiGrid-container {
+        display: flex;
+    }
+    /* Desktop specific styles for Dialog */
+    .MuiDialog-paperWidthSm {
+        max-width: 304px !important;
+    }
 }
