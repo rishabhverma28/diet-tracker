@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 // App CSS Import
 import "./App.css";
 // Material UI Component Imports
@@ -105,21 +106,25 @@ function App() {
     };
 
     // Function for the GET call to the API for search results
-    const handleChange = evt => {
-        setSearchText(evt.target.value);
-        searchText.length > 1 ? setSearching(true) : setSearching(false);
-        fetch(API_URL + `?query=${searchText}`, {
-            method: "GET",
-            headers: {
-                "x-app-id": APP_ID,
-                "x-app-key": API_KEY
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                setSearchResults(data);
-            });
-    };
+    useEffect(() => {
+        const headers = {
+            "x-app-id": APP_ID,
+            "x-app-key": API_KEY
+        };
+        if (searchText.length === 0) {
+            setSearching(false);
+            setSearchResults([]);
+        } else {
+            setSearching(true);
+            const fetchData = async () => {
+                const result = await axios(API_URL + `?query=${searchText}`, {
+                    headers
+                });
+                setSearchResults(result.data);
+            };
+            fetchData();
+        }
+    }, [searchText]);
 
     // Function for the POST call to the API for the common food items info
     const handleClickResults = data => {
@@ -256,7 +261,7 @@ function App() {
                     <InputBase
                         placeholder="Search foods..."
                         inputProps={{ "aria-label": "search" }}
-                        onChange={handleChange}
+                        onChange={e => setSearchText(e.target.value)}
                         value={searchText}
                         inputRef={searchRef}
                         className="app-search-text-box"
@@ -407,7 +412,7 @@ function App() {
                 </IconButton>
             </div>
             <Grid container spacing={0}>
-                <Grid item xs={12} md={4} className="user-info">
+                <Grid item xs={12} sm={5} md={4} className="user-info">
                     <Grid
                         container
                         spacing={0}
@@ -519,7 +524,7 @@ function App() {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} md={8} className="daily-food-items">
+                <Grid item xs={12} sm={7} md={8} className="daily-food-items">
                     {personData.data_points[currentDaySelected].intake_list.map(
                         (data, i) => {
                             return (
